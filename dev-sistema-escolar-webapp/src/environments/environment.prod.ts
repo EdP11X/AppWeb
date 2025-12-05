@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url_api: 'https://dev-sistema-escolar-fiona-danae.onrender.com'
+  url_api: 'https://appweb-3-9hed.onrender.com'
 };
