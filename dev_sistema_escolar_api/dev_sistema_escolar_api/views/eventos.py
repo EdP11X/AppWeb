@@ -21,7 +21,7 @@ class EventosAll(generics.CreateAPIView):
 class EventosView(generics.CreateAPIView):
     def get_permissions(self):
         if self.request.method in ['POST', 'PUT', 'DELETE']:
-            return [permissions.IsAuthenticated(), IsAdmin()]
+            return [permissions.IsAuthenticated()]
         return []
 
     def get(self, request, *args, **kwargs):
@@ -179,9 +179,3 @@ class EventosView(generics.CreateAPIView):
                 {"message": f"Error al eliminar el evento: {str(e)}"},
                 status=status.HTTP_400_BAD_REQUEST
             )
-class IsAdmin(permissions.BasePermission):
-    def has_permission(self, request, view):
-        user = getattr(request, "user", None)
-        if not user or not user.is_authenticated:
-            return False
-        return user.groups.filter(name='administrador').exists()
